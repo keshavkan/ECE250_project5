@@ -194,19 +194,18 @@ std::pair<double, int> Weighted_graph::minimum_spanning_tree() const {
 
 	//traverse through Edge vector 
 	for (unsigned int i = 0; i < eg_vector.size(); i++) {
-		Edge e = eg_vector.at(i); // OPT: create instance or nah
-		// add vertices and increment
+		Edge e = eg_vector.at(i); // OPT: create instance or nah or at front
+		// add vertices to join sets
 		v_set->set_union(e.v1, e.v2);
+        // increment count and weight
 		eg_count++;
 		mst_weight += e.weight;
-
+        
 		// break if all vertices are in one set. ie. mst created
 		if (v_set->disjoint_sets() == 1) {
 			break;
 		}
-
 	}
-
 
 
 	return std::pair<double, int>(mst_weight, eg_count);
