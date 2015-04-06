@@ -30,21 +30,29 @@
 #define nullptr 0
 #endif
 
+#include <vector>
 #include <iostream>
 #include <limits>
 #include "Exception.h"
+#include "Disjoint_sets.h"
 
 class Weighted_graph {
 	private:
 		static const double INF;
 
+
+		unsigned int numV;			// |V|
+		double **adjMatrix;			// adjacency matrix
+		unsigned int adjSize;		// adj size
+		unsigned int *degArray;		// vertex degree array; // could also just use for loop everytime
+		
 		// Do not implement these functions!
 		// By making these private and not implementing them, any attempt
 		// to make copies or assignments will result in errors
 		Weighted_graph( Weighted_graph const & );
 		Weighted_graph &operator=( Weighted_graph );
+        static bool comp_weight(const struct Edge &lhs, const struct Edge &rhs);
 
-		// your choice
 
 	public:
 		Weighted_graph( int = 10 );
@@ -57,6 +65,7 @@ class Weighted_graph {
 		bool insert_edge( int, int, double );
 		bool erase_edge( int, int );
 		void clear_edges();
+    
 
 	// Friends
 
@@ -65,24 +74,162 @@ class Weighted_graph {
 
 const double Weighted_graph::INF = std::numeric_limits<double>::infinity();
 
-Weighted_graph::Weighted_graph( int n ) {
+struct Edge {
+	unsigned int v1;
+	unsigned int v2;
+	double weight;
+};
+
+// Edge struct comparator function
+bool Weighted_graph::comp_weight(const struct Edge &lhs, const struct Edge &rhs) {
+    return lhs.weight < rhs.weight;
 }
 
+/*********************************************************************
+ * ***************************************************************** *
+ * *                                                               * *
+ * *   Constructor, Deconstructor				                   * *
+ * *                                                               * *
+ * ***************************************************************** *
+ *********************************************************************/
+
+/*
+ * Constructor: 
+ *
+ *
+ */
+Weighted_graph::Weighted_graph( int n ) {
+
+	numV = (unsigned int)n;
+	degArray = new unsigned int[numV];
+
+	//declare adjacency matrix
+	adjMatrix = new double*[numV];
+	//contiguous LT temporary array
+	adjSize = ((numV - 1) * numV) / 2;
+	adjMatrix[0] = nullptr;
+	adjMatrix[1] = new double[adjSize];
+
+
+	for (unsigned int i = 2; i < numV; i++) {
+		adjMatrix[i] = adjMatrix[i - 1] + i - 1;
+		degArray[i] = 0;
+	}
+
+	for (unsigned int i = 0; i < adjSize; i++) {
+		 adjMatrix[1][i] = 0;
+	}
+
+}
+
+/*
+ * Constructor: 
+ *
+ *
+ */
 Weighted_graph::~Weighted_graph() {
 }
 
-bool Weighted_graph::insert_edge( int i, int j, double d ) {
-	return false;
+/*********************************************************************
+ * ***************************************************************** *
+ * *                                                               * *
+ * *   Accessors                                                   * *
+ * *                                                               * *
+ * ***************************************************************** *
+ *********************************************************************/
+
+/*
+ * Constructor: 
+ *
+ *
+ */
+int Weighted_graph::degree(int i) const {
+
+ 	if (i < 0 || i >= numV) {
+ 		throw illegal_argument();
+ 	}
+
+    return degArray[i];
+}
+
+/*
+ * Constructor: 
+ *
+ *
+ */
+int Weighted_graph::edge_count() const {
+
+	unsigned int counter = 0;
+
+	//OPT LT array will be helpful
+	for (unsigned int i = 0; i < adjSize; i++) {
+		if (adjMatrix[1][i] != 0) {
+			counter++;
+		}
+	}
+
+	return counter;
 }
 
 std::pair<double, int> Weighted_graph::minimum_spanning_tree() const {
-	return std::pair<double, int>( 0.0, 0 );
+
+	unsigned int eg_count = 0;		//edge traversal count
+	double mst_weight = 0;			//tree weight
+	std::vector<Edge> eg_vector;	//Edge vector //OPT specify vector size
+
+	// traverse through adjMatrix and insert Edges to 
+	for (unsigned int i = 1; i < adjSize; i++) {
+		for (unsigned int j = 0; j < i; j++) {
+			if (adjMatrix[i][j] != 0) {
+				eg_vector.insert(eg_vector.end(), (Edge){i, j, adjMatrix[i][j]});
+			}
+		}
+	}
+
+	// sort Edge vector
+    std::sort(eg_vector.begin(), eg_vector.end(), comp_weight);
+
+	//create disjoint set for every vertex
+    Data_structures::Disjoint_sets *v_set = new Data_structures::Disjoint_sets(numV);
+
+	//traverse through Edge vector 
+	for (unsigned int i = 0; i < eg_vector.size(); i++) {
+		Edge e = eg_vector.at(i); // OPT: create instance or nah
+		// add vertices and increment
+		v_set->set_union(e.v1, e.v2);
+		eg_count++;
+		mst_weight += e.weight;
+
+		// break if all vertices are in one set. ie. mst created
+		if (v_set->disjoint_sets() == 1) {
+			break;
+		}
+
+	}
+
+
+
+	return std::pair<double, int>(mst_weight, eg_count);
 }
+
+
 
 std::ostream &operator<<( std::ostream &out, Weighted_graph const &graph ) {
 	// Your implementation
 
 	return out;
+}
+
+/*********************************************************************
+ * ***************************************************************** *
+ * *                                                               * *
+ * *   Mutators 								                   * *
+ * *                                                               * *
+ * ***************************************************************** *
+ *********************************************************************/
+
+ bool Weighted_graph::insert_edge( int i, int j, double d ) {
+	return false;
 }
 
 #endif
