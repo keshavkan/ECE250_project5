@@ -23,7 +23,7 @@ namespace Data_structures {
 			int disjoint_sets() const;
 
 			// Mutators
-			void set_union( int, int );
+			bool set_union( int, int );
 			void clear();
 
 		private:
@@ -184,7 +184,7 @@ namespace Data_structures {
 	 *          update the maximum height of a tree.
 	 *********************************************************************/
 
-	void Disjoint_sets::set_union( int m, int n ) {
+	bool Disjoint_sets::set_union( int m, int n ) {
 		assert( n >= 0 && n < array_size );
 		assert( m >= 0 && m < array_size );
 
@@ -193,7 +193,7 @@ namespace Data_structures {
 		n = find( n );
 
 		if ( m == n ) {
-			return;
+			return false;
 		}
 
 		--num_disjoint_sets;
@@ -213,7 +213,9 @@ namespace Data_structures {
 			}
 		} else {
 			parent[m] = n;
-		} 
+		}
+        
+        return true;
 	}
 
 	/*********************************************************************

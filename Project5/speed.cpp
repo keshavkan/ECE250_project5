@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include "Weighted_graph.h"
+#include "ece250.h"
 
 /*******************************************************************
  *
@@ -55,6 +56,7 @@ int main( int argc, char *argv[] ) {
 
 	Weighted_graph g( N );
 
+
 	for ( int i = 0; i < N*N; ++i ) {
 		for ( int j = 0; j < 10; ++j ) {
 			int x = lrand48() % N;
@@ -67,6 +69,7 @@ int main( int argc, char *argv[] ) {
 		total += result.first;
 		count += result.second;
 	}
+
 
 	std::cout << total << ", " << count << std::endl;
 

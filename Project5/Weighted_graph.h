@@ -141,7 +141,13 @@ Weighted_graph::~Weighted_graph() {
 
 std::ostream &operator<<( std::ostream &out, Weighted_graph const &graph ) {
 	// Your implementation
-
+    out << std::endl;
+    for (unsigned int i = 1; i < graph.numV; i++) {
+        for (unsigned int j = 0; j < i; j++) {
+            out << graph.adjMatrix[i][j] << '\t';
+        }
+        out << std::endl;
+    }
 	return out;
 }
 
@@ -204,7 +210,6 @@ int Weighted_graph::edge_count() const {
  */
 std::pair<double, int> Weighted_graph::minimum_spanning_tree() const {
     
-    // DELETE Disjoint and vector
 	unsigned int eg_count = 0;		//edge traversal count
 	double mst_weight = 0;			//tree weight
 	std::vector<Edge> eg_vector;	//Edge vector //OPT specify vector size(edge_count())
@@ -217,30 +222,29 @@ std::pair<double, int> Weighted_graph::minimum_spanning_tree() const {
 			}
 		}
 	}
-
+    
 	// sort Edge vector
     std::sort(eg_vector.begin(), eg_vector.end(), comp_weight);
-
+    
 	//create disjoint set for every vertex
-    Data_structures::Disjoint_sets *v_set = new Data_structures::Disjoint_sets(numV);
+    Data_structures::Disjoint_sets v_set = Data_structures::Disjoint_sets(numV);
 
 	//traverse through Edge vector 
 	for (unsigned int i = 0; i < eg_vector.size(); i++) {
 		Edge e = eg_vector.at(i); // OPT: create instance or nah or at front
-		// add vertices to join sets
-		v_set->set_union(e.v1, e.v2);
-        // increment count and weight
-		eg_count++;
-		mst_weight += e.weight;
+        eg_count++;
+		// add vertices to join sets and increment weight
+        if (v_set.set_union(e.v1, e.v2)) {
+            mst_weight += e.weight;
+        }
         
 		// break if all vertices are in one set. ie. mst created
-		if (v_set->disjoint_sets() == 1) {
+		if (v_set.disjoint_sets() == 1) {
 			break;
 		}
 	}
     
     eg_vector.clear();
-    delete v_set;
 
 	return std::pair<double, int>(mst_weight, eg_count);
 }
