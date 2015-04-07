@@ -185,13 +185,6 @@ int Weighted_graph::edge_count() const {
 
 	unsigned int counter = 0;
 
-	//OPT traversing through degArray will be faster sum(degArray)/2
-	// for (unsigned int i = 0; i < adjSize; i++) {
-	// 	if (adjMatrix[1][i] != 0) {
-	// 		counter++;
-	// 	}
-	// }
-
 	for (unsigned int i = 0; i < numV; i++) {
 		counter += degArray[i];
 	}
@@ -212,7 +205,7 @@ std::pair<double, int> Weighted_graph::minimum_spanning_tree() const {
     
 	unsigned int eg_count = 0;		//edge traversal count
 	double mst_weight = 0;			//tree weight
-	std::vector<Edge> eg_vector;	//Edge vector //OPT specify vector size(edge_count())
+    std::vector<Edge> eg_vector;	//Edge vector //OPT specify vector size(edge_count())
 
 	// traverse through adjMatrix and insert Edges to 
 	for (unsigned int i = 1; i < numV; i++) {
@@ -280,8 +273,6 @@ bool Weighted_graph::insert_edge( int i, int j, double d ) {
 	// insert edge weight to adjMatrix
 	adjMatrix[i][j] = d;
 
-
-	// OPT can remove degArray
 	degArray[i]++;
 	degArray[j]++;
 
