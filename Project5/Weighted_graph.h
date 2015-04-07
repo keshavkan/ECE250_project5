@@ -203,13 +203,14 @@ int Weighted_graph::edge_count() const {
  * Returns: a pair containing the weight of the graph and the number of edges scanned
  */
 std::pair<double, int> Weighted_graph::minimum_spanning_tree() const {
-
+    
+    // DELETE Disjoint and vector
 	unsigned int eg_count = 0;		//edge traversal count
 	double mst_weight = 0;			//tree weight
 	std::vector<Edge> eg_vector;	//Edge vector //OPT specify vector size(edge_count())
 
 	// traverse through adjMatrix and insert Edges to 
-	for (unsigned int i = 1; i < adjSize; i++) {
+	for (unsigned int i = 1; i < numV; i++) {
 		for (unsigned int j = 0; j < i; j++) {
 			if (adjMatrix[i][j] != 0) {
 				eg_vector.insert(eg_vector.end(), (Edge){i, j, adjMatrix[i][j]});
@@ -237,7 +238,9 @@ std::pair<double, int> Weighted_graph::minimum_spanning_tree() const {
 			break;
 		}
 	}
-
+    
+    eg_vector.clear();
+    delete v_set;
 
 	return std::pair<double, int>(mst_weight, eg_count);
 }

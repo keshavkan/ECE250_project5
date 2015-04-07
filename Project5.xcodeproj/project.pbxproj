@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6B8B06C71AD20A5F0073AFC1 /* Weighted_graph_driver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B8B06C21AD20A5F0073AFC1 /* Weighted_graph_driver.cpp */; };
+		6B8B06CE1AD356CB0073AFC1 /* P5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B8B06CD1AD356CB0073AFC1 /* P5.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,13 +25,13 @@
 /* Begin PBXFileReference section */
 		6B8B06B61AD209E90073AFC1 /* Project5 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Project5; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B8B06C11AD20A5F0073AFC1 /* test.in.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.in.txt; sourceTree = "<group>"; };
-		6B8B06C21AD20A5F0073AFC1 /* Weighted_graph_driver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Weighted_graph_driver.cpp; sourceTree = "<group>"; };
 		6B8B06C31AD20A5F0073AFC1 /* Weighted_graph_tester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weighted_graph_tester.h; sourceTree = "<group>"; };
 		6B8B06C41AD20A5F0073AFC1 /* Weighted_graph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weighted_graph.h; sourceTree = "<group>"; };
 		6B8B06C91AD20ED40073AFC1 /* ece250.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ece250.h; sourceTree = "<group>"; };
 		6B8B06CA1AD20ED40073AFC1 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
 		6B8B06CB1AD20ED40073AFC1 /* Tester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tester.h; sourceTree = "<group>"; };
 		6B8B06CC1AD3418F0073AFC1 /* Disjoint_sets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Disjoint_sets.h; sourceTree = "<group>"; };
+		6B8B06CD1AD356CB0073AFC1 /* P5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = P5.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,12 +64,12 @@
 		6B8B06B81AD209E90073AFC1 /* Project5 */ = {
 			isa = PBXGroup;
 			children = (
+				6B8B06CD1AD356CB0073AFC1 /* P5.cpp */,
 				6B8B06CC1AD3418F0073AFC1 /* Disjoint_sets.h */,
 				6B8B06C91AD20ED40073AFC1 /* ece250.h */,
 				6B8B06CA1AD20ED40073AFC1 /* Exception.h */,
 				6B8B06CB1AD20ED40073AFC1 /* Tester.h */,
 				6B8B06C11AD20A5F0073AFC1 /* test.in.txt */,
-				6B8B06C21AD20A5F0073AFC1 /* Weighted_graph_driver.cpp */,
 				6B8B06C31AD20A5F0073AFC1 /* Weighted_graph_tester.h */,
 				6B8B06C41AD20A5F0073AFC1 /* Weighted_graph.h */,
 			);
@@ -132,7 +132,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B8B06C71AD20A5F0073AFC1 /* Weighted_graph_driver.cpp in Sources */,
+				6B8B06CE1AD356CB0073AFC1 /* P5.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
