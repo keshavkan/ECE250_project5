@@ -4,11 +4,11 @@
  *  - Select the current calendar term and enter the year
  *  - List students with whom you had discussions and who helped you
  *
- * uWaterloo User ID:  uwuserid @uwaterloo.ca
+ * uWaterloo User ID:  skkanata @uwaterloo.ca
  * Submitted for ECE 250
  * Department of Electrical and Computer Engineering
  * University of Waterloo
- * Calender Term of Submission:  (Winter|Spring|Fall) 201N
+ * Calender Term of Submission:  (Winter) 2015
  *
  * By submitting this file, I affirm that
  * I am the author of all modifications to
@@ -16,7 +16,7 @@
  *
  * The following is a list of uWaterloo User IDs of those students
  * I had discussions with in preparing this project:
- *    -
+ *    - Douglas Harder - Disjoint_sets class
  *
  * The following is a list of uWaterloo User IDs of those students
  * who helped me with this project (describe their help; e.g., debugging):
@@ -44,8 +44,8 @@ class Weighted_graph {
 		unsigned int numV;			// |V|
 		double **adjMatrix;			// adjacency matrix
 		unsigned int adjSize;		// adj size
-		unsigned int *degArray;		// vertex degree array; // could also just use for loop everytime
-		
+		unsigned int *degArray;		// vertex degree array;
+    
 		// Do not implement these functions!
 		// By making these private and not implementing them, any attempt
 		// to make copies or assignments will result in errors
